@@ -5,11 +5,11 @@ import time
 import csv
 import random
 
-post_relative_url = '/ricardo.orozco.7792/posts/10158529469394121'
+post_relative_url = 'permalink.php?story_fbid=102007058948232&id=101798202302451'
 
 split_url = post_relative_url.split('/')
 
-post_id = split_url[len(split_url)-1]
+post_id = '102007058948232'
 
 post_url = 'https://www.facebook.com/' + post_relative_url
 post_url_basic = 'https://mbasic.facebook.com/' + post_relative_url
@@ -99,11 +99,11 @@ with open('accounts.csv') as csvfileaccounts:
                 print("Oops!  That was no valid number.  Try again...")
 
             # url para comentar
-            driver.get(post_url)
-            time.sleep(4)
-            coment = '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div/div/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[2]/div[5]/div[2]/div/div/div/div/form/div/div/div[2]/div'
+            # driver.get(post_url)
+            # time.sleep(4)
+            coment = '//*[@id="composerInput"]'
             coment_element = driver.find_element_by_xpath(coment)
-            driver.execute_script("arguments[0].click();", coment_element)
+            driver.execute_script("arguments[0].focus();", coment_element)
 
             time.sleep(2)
 
@@ -112,6 +112,10 @@ with open('accounts.csv') as csvfileaccounts:
             pyautogui.typewrite("\n")
             # remover comentario para no repetir
             comments.pop(rand)
+            
+            submit = '/html/body/div/div/div[2]/div/div[1]/div[2]/div/div[4]/form[1]/table/tbody/tr/td[2]/div/input'
+            submit_element = driver.find_element_by_xpath(submit)
+            driver.execute_script("arguments[0].click();", submit_element)
 
             #like_button_element = driver.find_element_by_css_selector(
             #    "div.rq0escxv.l9j0dhe7.du4w35lb.j83agx80.g5gj957u.rj1gh0hx.buofh1pr.hpfvmrgz.taijpn5t.bp9cbjyn.owycx6da.btwxx1t3.d1544ag0.tw6a2znq.jb3vyjys.dlv3wnog.rl04r1d5.mysgfdmx.hddg9phg.qu8okrzs.g0qnabr5")
